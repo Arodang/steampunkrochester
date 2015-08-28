@@ -17,6 +17,10 @@
     <p>Content goes here</p>
     <div ng-controller="nameGenController">
         {{testdata}}
+
+        <div ng-repeat="name in listOfNames">
+            <p ng-bind="name"></p>
+        </div>
     </div>
 </body>
 </html>
