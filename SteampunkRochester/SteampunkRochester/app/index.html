@@ -11,13 +11,45 @@
     <link href="../css/default.css" rel="stylesheet" />
     <script src="app.js"></script>
 
-    
+    <!-- Bootstrap! -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
 </head>
 <body ng-app="steampunkRochester">
-    <div ng-controller="nameGenController">
+    <div ng-controller="nameGenController" class="container theme-showcase">
 
-        <div ng-repeat="name in listOfNames">
-            <p ng-bind="name"></p>
+        <h2 class="page-header">Generate a 1920s Name</h2>
+        <div class="row col-sm-4 col-md-8 col-lg-8">
+            <div class="row">
+                <label>Number of names to create (between 1 and 25): </label>
+                <input type="number" min="1" max="25" ng-model="numNamesToGen" />
+            </div>
+
+            <div class="row">
+                <label>Gender: </label>
+                <select ng-model="nameGender">
+                    <option selected value="1">Male</option>
+                    <option value="2">Female</option>
+                    <option value="3">Both</option>
+                </select>
+
+
+            </div>
+
+            <button ng-click="generateNames()" class="btn btn-default">Generate Names</button>
+
+            <div class="row">
+                <ul class="list-group">
+                    <li ng-repeat="name in listOfNames" class="list-group-item"> {{name}} </li>
+                </ul>
+            </div>
         </div>
 
     </div>

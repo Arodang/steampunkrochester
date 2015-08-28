@@ -3,10 +3,14 @@
 	var app = angular.module("steampunkRochester", []);
 
 	var nameGenController = app.controller("nameGenController", ["$scope", "nameGenService", function ($scope, nameGenService) {
-	    $scope.listOfNames = nameGenService.generateName(15);
+	    $scope.numNamesToGen = 5;
+	    $scope.generateNames = function () {
+	        $scope.listOfNames = nameGenService.generateName($scope.numNamesToGen, $scope.nameGender);
+	    };
+	    
 	}]);
 
-	var nameGenService = app.factory("nameGenService", ["$http", function ($http) {
+	var nameGenService = app.factory("nameGenService", [function () {
 	    //Including giant list of names here to avoid cross-domain call errors since we aren't hosting a server
 	    //First names from http://www.ssa.gov/oact/babynames/decades/names1920s.html
 	    //Last names from http://www.mifamilyhistory.org/mimack/census/1920surnameEngadine.asp
@@ -32,7 +36,7 @@
 	            }
                 //Both
 	            else {
-	                if (privateGenerateRandomValue(0, 1) === 0) {
+	                if (privateGenerateRandomValue(0, 2) === 0) {
 	                    firstName = maleNames[privateGenerateRandomValue(0, maleNames.length)];
 	                }
 	                else {

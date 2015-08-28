@@ -1,2 +1,6 @@
-﻿body {
+﻿.btn {
+    margin:20px 0px;
+}
+.list-group {
+    margin:20px 0px;
 }
