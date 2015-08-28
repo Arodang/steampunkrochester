@@ -3,7 +3,6 @@
 	var app = angular.module("steampunkRochester", []);
 
 	var nameGenController = app.controller("nameGenController", ["$scope", "nameGenService", function ($scope, nameGenService) {
-	    $scope.testdata = "Hello world!"
 	    $scope.listOfNames = nameGenService.generateName(15);
 	}]);
 
