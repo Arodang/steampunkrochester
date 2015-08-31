@@ -20,6 +20,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <!-- Firebase -->
+    <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
+    <!-- AngularFire -->
+    <script src="https://cdn.firebase.com/libs/angularfire/1.1.2/angularfire.min.js"></script>
+
 
 </head>
 <body ng-app="steampunkRochester">
@@ -51,6 +56,173 @@
                 </ul>
             </div>
         </div>
+
+    </div>
+    <hr />
+    <div ng-controller="censusDataController" class="container theme-showcase">
+        <h2 class="page-header">1920s Rochester Census Data</h2>
+        <p>Access the census data <a href="https://archive.org/stream/14thcensusofpopu1125unit">here</a>.</p>
+
+        <div class="row">
+            <div>
+                <button ng-click="showForm=true" class="btn btn-default">Show Form</button>
+                <button ng-click="showForm=false" class="btn btn-default">Hide Form</button>
+            </div>
+
+
+            <form ng-show="showForm">
+                <h4>Enter in a person from the census data:</h4>
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <div class="form-group">
+                        <label>First Name: </label>
+                        <input class="form-control" type="text" ng-model="person.firstName" />
+                    </div>
+                    <div class="form-group">
+                        <label>Last Name: </label>
+                        <input class="form-control" type="text" ng-model="person.lastName" />
+                    </div>
+                    <div class="form-group">
+                        <label>Sex: </label>
+                        <input class="form-control" type="text" ng-model="person.sex" />
+                    </div>
+                    <div class="form-group">
+                        <label>Color/Race: </label>
+                        <input class="form-control" type="text" ng-model="person.colorOrRace" />
+                    </div>
+                    <div class="form-group">
+                        <label>Age: </label>
+                        <input class="form-control" type="text" ng-model="person.age" />
+                    </div>
+                    <div class="form-group">
+                        <label>Relationship Status: </label>
+                        <input class="form-control" type="text" ng-model="person.relationship" />
+                    </div>
+                    <div class="form-group">
+                        <label>Year Of Immigration: </label>
+                        <input class="form-control" type="text" ng-model="person.yearOfImmigration" />
+                    </div>
+                    <div class="form-group">
+                        <label>Naturalized Or Alien: </label>
+                        <input class="form-control" type="text" ng-model="person.naturalizedOrAlien" />
+                    </div>
+                    <div class="form-group">
+                        <label>Year Of Naturalization: </label>
+                        <input class="form-control" type="text" ng-model="person.yearOfNaturalization" />
+                    </div>
+                    <div class="form-group">
+                        <label>Attending school: </label>
+                        <input class="form-control" type="text" ng-model="person.attendingSchool" />
+                    </div>
+                    <div class="form-group">
+                        <label>Can Read: </label>
+                        <input class="form-control" type="text" ng-model="person.canRead" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Can Write: </label>
+                        <input class="form-control" type="text" ng-model="person.canWrite" />
+                    </div>
+
+                    
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <div class="form-group">
+                        <label>Place Of Birth: </label>
+                        <input class="form-control" type="text" ng-model="person.placeOfBirth" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Native Tongue: </label>
+                        <input class="form-control" type="text" ng-model="person.nativeTongue" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Father's Place of Birth: </label>
+                        <input class="form-control" type="text" ng-model="person.fatherPlaceOfBirth" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Father's Tongue: </label>
+                        <input class="form-control" type="text" ng-model="person.fatherTongue" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Mother's Place Of Birth: </label>
+                        <input class="form-control" type="text" ng-model="person.motherPlaceOfBirth" />
+                    </div>
+                    <div class="form-group">
+                        <label>Mother's Tongue: </label>
+                        <input class="form-control" type="text" ng-model="person.motherTongue" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Can Speak English: </label>
+                        <input class="form-control" type="text" ng-model="person.speakEnglish" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Profession: </label>
+                        <input class="form-control" type="text" ng-model="person.profession" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Industry: </label>
+                        <input class="form-control" type="text" ng-model="person.industry" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Your Name: </label>
+                        <input class="form-control" type="text" ng-model="person.transcriber" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Page Number: </label>
+                        <input class="form-control" type="text" ng-model="person.pageNum" />
+                    </div>
+                    <button type="submit" class="btn btn-default" ng-click="addPerson()">Submit</button>
+                </div>
+            </form>
+
+        </div>
+
+        <div class="row list-group col-lg-12 col-md-10">
+            <h4>Previous entries:</h4>
+            <div class="row">
+                <table border="1">
+                    <tr>
+                        <th>Name</th>
+                        <th>Sex</th>
+                        <th>Color/Race</th>
+                        <th>Age</th>
+                        <th>Can Read</th>
+                        <th>Can Write</th>
+                        <th>Birthplace</th>
+                        <th>Native Tongue</th>
+                        <th>Father's Birthplace</th>
+                        <th>Mother's Birthplace</th>
+                        <th>Profession</th>
+                        <th>Industry</th>
+                        <th>Page #</th>
+                    </tr>
+                    <tr ng-repeat="p in persons">
+                        <td ng-bind="p.firstName + ' ' + p.lastName"></td>
+                        <td ng-bind="p.sex"></td>
+                        <td ng-bind="p.colorOrRace"></td>
+                        <td ng-bind="p.age"></td>
+                        <td ng-bind="p.canRead"></td>
+                        <td ng-bind="p.canWrite"></td>
+                        <td ng-bind="p.placeOfBirth"></td>
+                        <td ng-bind="p.nativeTongue"></td>
+                        <td ng-bind="p.fatherPlaceOfBirth"></td>
+                        <td ng-bind="p.motherPlaceOfBirth"></td>
+                        <td ng-bind="p.profession"></td>
+                        <td ng-bind="p.industry"></td>
+                        <td ng-bind="p.pageNum"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
 
     </div>
 </body>
