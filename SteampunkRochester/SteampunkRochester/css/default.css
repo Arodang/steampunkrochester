@@ -4,3 +4,10 @@
 .list-group {
     margin:20px 0px;
 }
+
+tr > th {
+    padding : 8px
+}
+tr > td {
+    padding : 4px
+}
